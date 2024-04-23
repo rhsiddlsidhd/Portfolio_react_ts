@@ -47,8 +47,7 @@ const Header = () => {
               className="img_logo"
             />
           </LeftWrapper>
-          <CenterWrapper />
-
+          <CenterWrapper hideOnSmallScreens="true" />
           <ResponseInputIconWrapper>
             <FontAwesomeIcon
               icon={faMagnifyingGlass}
@@ -60,7 +59,6 @@ const Header = () => {
               <FontAwesomeIcon icon={faMicrophone} className="micro_icon" />
             </MicroIconWrapper>
           </ResponseInputIconWrapper>
-
           <RightWrapper>
             <div className="bell_icon_wrapper">
               <FontAwesomeIcon icon={faBell} className="bell_icon" />

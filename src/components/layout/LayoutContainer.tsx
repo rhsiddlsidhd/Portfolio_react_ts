@@ -1,10 +1,14 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, RefObject } from "react";
 import styled from "styled-components";
 
-const LayoutContainer = ({ children }: PropsWithChildren) => {
+interface Props {
+  windowRef?: RefObject<HTMLDivElement>;
+}
+
+const LayoutContainer = ({ windowRef, children }: PropsWithChildren<Props>) => {
   return (
     <>
-      <HeaderContainer>{children}</HeaderContainer>
+      <HeaderContainer ref={windowRef}>{children}</HeaderContainer>
     </>
   );
 };

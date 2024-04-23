@@ -4,12 +4,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const CenterWrapper = () => {
+interface Props {
+  hideOnSmallScreens: string;
+}
+
+const CenterWrapper = ({ hideOnSmallScreens }: Props) => {
   return (
-    <SearchContainer>
-      <InputKeywordSearchLabel>
+    <SearchContainer hideOnSmallScreens={hideOnSmallScreens}>
+      <InputKeywordSearchLabel hideOnSmallScreens={hideOnSmallScreens}>
         <input
           type="text"
           className="input_keyword_search"
@@ -31,28 +35,50 @@ const CenterWrapper = () => {
 
 export default CenterWrapper;
 
-const SearchContainer = styled.div`
+const SearchContainer = styled.div<{ hideOnSmallScreens: string }>`
   max-width: 50%;
   width: 50rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  @media screen and (max-width: 767px) {
-    display: none;
-  }
+  ${({ hideOnSmallScreens }) =>
+    hideOnSmallScreens &&
+    hideOnSmallScreens === "false" &&
+    css`
+      @media screen and (max-width: 767px) {
+        max-width: 100%;
+        height: 100%;
+      }
+    `}
+
+  ${({ hideOnSmallScreens }) =>
+    hideOnSmallScreens &&
+    hideOnSmallScreens === "true" &&
+    css`
+      @media screen and (max-width: 767px) {
+        display: none;
+      }
+    `}
 `;
 
-const InputKeywordSearchLabel = styled.label`
+const InputKeywordSearchLabel = styled.label<{ hideOnSmallScreens: string }>`
   width: 90%;
   height: 80%;
   display: flex;
   align-items: center;
   border: 1.5px solid gray;
   border-radius: 2rem;
-  @media screen and (max-width: 767px) {
-    display: none;
-  }
+
+  ${({ hideOnSmallScreens }) =>
+    hideOnSmallScreens &&
+    hideOnSmallScreens === "true" &&
+    css`
+      @media screen and (max-width: 767px) {
+        display: none;
+      }
+    `}
+
   .input_keyword_search {
     width: 100%;
     height: 75%;
