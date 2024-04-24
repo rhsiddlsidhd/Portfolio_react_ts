@@ -2,18 +2,18 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { RefObject } from "react";
 import styled from "styled-components";
-import CenterWrapper from "../../components/layout/CenterWrapper";
-import LayoutContainer from "../../components/layout/LayoutContainer";
+import CenterWrapper from "../../components/Layout/CenterWrapper";
+import LayoutContainer from "../../components/Layout/LayoutContainer";
 
 interface Props {
   handleResponseHeaderBar: any;
-  windowRef: RefObject<HTMLDivElement>;
+  headerRef: RefObject<HTMLDivElement>;
 }
 
-const ResponseHeader = ({ handleResponseHeaderBar, windowRef }: Props) => {
+const ResponseHeader = ({ handleResponseHeaderBar, headerRef }: Props) => {
   return (
     <>
-      <LayoutContainer windowRef={windowRef}>
+      <LayoutContainer headerRef={headerRef}>
         <ResponswBackBtnIconWrapper>
           <FontAwesomeIcon
             icon={faArrowLeft}
@@ -37,6 +37,7 @@ const ResponswBackBtnIconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
   .arrow {
     color: white;
   }
@@ -45,5 +46,4 @@ const ResponswBackBtnIconWrapper = styled.div`
 const InputSearchWrapper = styled.div`
   width: 80%;
   height: 100%;
-  background-color: white;
 `;

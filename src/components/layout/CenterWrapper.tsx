@@ -35,9 +35,10 @@ const CenterWrapper = ({ hideOnSmallScreens }: Props) => {
 
 export default CenterWrapper;
 
-const SearchContainer = styled.div<{ hideOnSmallScreens: string }>`
+const SearchContainer = styled.div<{ hideOnSmallScreens?: string }>`
   max-width: 50%;
   width: 50rem;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;

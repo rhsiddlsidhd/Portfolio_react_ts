@@ -8,12 +8,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import ResponseHeader from "./ResponseHeader";
-import LayoutContainer from "../../components/layout/LayoutContainer";
-import CenterWrapper from "../../components/layout/CenterWrapper";
+import LayoutContainer from "../../components/Layout/LayoutContainer";
+import CenterWrapper from "../../components/Layout/CenterWrapper";
+import { Outlet } from "react-router-dom";
 
 const Header = () => {
   const [isResponseHeaderBar, setIsResponseHeaderBar] = useState(false);
-  const windowRef = useRef<HTMLDivElement | null>(null);
+  const headerRef = useRef<HTMLDivElement | null>(null);
+  const windowHeaderHeightRef = useRef<HTMLDivElement | null>(null);
 
   const handleResponseHeaderBar = () => {
     setIsResponseHeaderBar(!isResponseHeaderBar);
@@ -21,24 +23,25 @@ const Header = () => {
 
   useEffect(() => {
     const reSizeCheck = () => {
-      if (windowRef.current && windowRef.current.offsetWidth >= 767) {
+      if (headerRef.current && headerRef.current.offsetWidth >= 767) {
+        console.log(headerRef.current);
         setIsResponseHeaderBar(false);
       }
     };
     reSizeCheck();
     window.addEventListener("resize", reSizeCheck);
-  }, [windowRef]);
+  }, [headerRef]);
 
   return (
     <>
       {isResponseHeaderBar && (
         <ResponseHeader
           handleResponseHeaderBar={handleResponseHeaderBar}
-          windowRef={windowRef}
+          headerRef={headerRef}
         />
       )}
       {!isResponseHeaderBar && (
-        <LayoutContainer>
+        <LayoutContainer windowHeaderHeightRef={windowHeaderHeightRef}>
           <LeftWrapper>
             <FontAwesomeIcon icon={faBars} className="hamburger_menu" />
             <img
@@ -69,6 +72,7 @@ const Header = () => {
           </RightWrapper>
         </LayoutContainer>
       )}
+      <Outlet />
     </>
   );
 };

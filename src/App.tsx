@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./pages/main/Main";
 import Header from "./layout/header/Header";
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       <BrowserRouter>
@@ -17,6 +17,6 @@ function App() {
       </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
