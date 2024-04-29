@@ -7,7 +7,7 @@ import Header from "./layout/header/Header";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundColor: "black" }}>
       <BrowserRouter>
         <Routes>
           <Route element={<Header />}>
