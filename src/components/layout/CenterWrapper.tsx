@@ -3,21 +3,37 @@ import {
   faMicrophone,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 
 interface Props {
-  hideOnSmallScreens: string;
+  $isResponsiveScreen: string;
 }
 
-const CenterWrapper = ({ hideOnSmallScreens }: Props) => {
+const CenterWrapper = ({ $isResponsiveScreen }: Props) => {
+  const [isValue, setIsValue] = useState("");
+
+  const handleIsValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log(e.target);
+    setIsValue(e.target.value);
+  };
+
   return (
-    <SearchContainer hideOnSmallScreens={hideOnSmallScreens}>
-      <InputKeywordSearchLabel hideOnSmallScreens={hideOnSmallScreens}>
+    <SearchContainer $responsive={$isResponsiveScreen}>
+      <InputKeywordSearchLabel
+        $responsive={$isResponsiveScreen}
+        $isInputValue={isValue.length > 0}
+      >
+        <FontAwesomeIcon
+          icon={faMagnifyingGlass}
+          className="hide_search_icon"
+        />
         <input
           type="text"
           className="input_keyword_search"
           placeholder="검색"
+          onChange={(e) => handleIsValue(e)}
+          value={isValue}
         />
         <div className="input_keyword_search_icon_wrapper">
           <FontAwesomeIcon
@@ -35,17 +51,17 @@ const CenterWrapper = ({ hideOnSmallScreens }: Props) => {
 
 export default CenterWrapper;
 
-const SearchContainer = styled.div<{ hideOnSmallScreens?: string }>`
+const SearchContainer = styled.div<{ $responsive?: string }>`
   max-width: 50%;
   width: 50rem;
-  height: 100%;
+
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
 
-  ${({ hideOnSmallScreens }) =>
-    hideOnSmallScreens &&
-    hideOnSmallScreens === "false" &&
+  ${({ $responsive }) =>
+    $responsive &&
+    $responsive === "false" &&
     css`
       @media screen and (max-width: 767px) {
         max-width: 100%;
@@ -53,9 +69,9 @@ const SearchContainer = styled.div<{ hideOnSmallScreens?: string }>`
       }
     `}
 
-  ${({ hideOnSmallScreens }) =>
-    hideOnSmallScreens &&
-    hideOnSmallScreens === "true" &&
+  ${({ $responsive }) =>
+    $responsive &&
+    $responsive === "true" &&
     css`
       @media screen and (max-width: 767px) {
         display: none;
@@ -63,17 +79,42 @@ const SearchContainer = styled.div<{ hideOnSmallScreens?: string }>`
     `}
 `;
 
-const InputKeywordSearchLabel = styled.label<{ hideOnSmallScreens: string }>`
-  width: 90%;
+/**
+ * input의 유효성이 true일때
+ * 현재 라벨 총 사이즈 35rem
+ * 증가해야할 사이즈 3rem
+ *
+ * label의 사이즈 증가
+ * icon none 에서 block 처리
+ * input_keyword_search 의 margin-left: 0 처리
+ *
+ */
+
+const InputKeywordSearchLabel = styled.label<{
+  $responsive: string;
+  $isInputValue: boolean;
+}>`
+  width: ${({ $isInputValue }) => ($isInputValue ? "85%" : "80%")};
   height: 80%;
   display: flex;
   align-items: center;
+  justify-content: end;
   border: 1.5px solid gray;
   border-radius: 2rem;
 
-  ${({ hideOnSmallScreens }) =>
-    hideOnSmallScreens &&
-    hideOnSmallScreens === "true" &&
+  .hide_search_icon {
+    display: ${({ $isInputValue }) => ($isInputValue ? "flex" : "none")};
+    color: white;
+    width: 5%;
+    height: 60%;
+    justify-content: center;
+    align-content: center;
+    padding: 0.725rem;
+  }
+
+  ${({ $responsive }) =>
+    $responsive &&
+    $responsive === "true" &&
     css`
       @media screen and (max-width: 767px) {
         display: none;
@@ -81,13 +122,16 @@ const InputKeywordSearchLabel = styled.label<{ hideOnSmallScreens: string }>`
     `}
 
   .input_keyword_search {
-    width: 100%;
+    width: 85%;
     height: 75%;
     border: none;
     outline: none;
     display: flex;
     color: white;
-    margin-left: 1rem;
+    background-color: ${({ theme }) => theme.bgc.main};
+
+    /* 유효성검사시 0rem 으로 전환 */
+    margin-left: ${({ $isInputValue }) => ($isInputValue ? "0rem" : "1rem")};
 
     &::placeholder {
       font-size: 1.2rem;
@@ -95,7 +139,7 @@ const InputKeywordSearchLabel = styled.label<{ hideOnSmallScreens: string }>`
     }
   }
   .input_keyword_search_icon_wrapper {
-    width: 4rem;
+    min-width: 4rem;
     height: 100%;
     background-color: gray;
     border-top-right-radius: 2rem;

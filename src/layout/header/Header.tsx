@@ -50,7 +50,7 @@ const Header = () => {
               className="img_logo"
             />
           </LeftWrapper>
-          <CenterWrapper hideOnSmallScreens="true" />
+          <CenterWrapper $isResponsiveScreen="true" />
           <ResponseInputIconWrapper>
             <FontAwesomeIcon
               icon={faMagnifyingGlass}

@@ -22,7 +22,7 @@ const ResponseHeader = ({ handleResponseHeaderBar, headerRef }: Props) => {
           />
         </ResponswBackBtnIconWrapper>
         <InputSearchWrapper>
-          <CenterWrapper hideOnSmallScreens="false" />
+          <CenterWrapper $isResponsiveScreen="false" />
         </InputSearchWrapper>
       </LayoutContainer>
     </>

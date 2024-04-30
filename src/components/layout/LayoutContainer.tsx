@@ -25,9 +25,7 @@ export default LayoutContainer;
 
 const HeaderContainer = styled.div`
   width: 100%;
-  height: ${({ theme }) => theme.height.xl};
-  /* height: 5rem; */
+  height: ${({ theme }) => theme.height.header};
   display: flex;
   justify-content: space-between;
-  border: 1px solid red;
 `;

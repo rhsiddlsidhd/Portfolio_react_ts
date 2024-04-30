@@ -12,7 +12,7 @@ interface MenuListProps {
 const MenuList = ({ menu, icon, isFirstIcon }: MenuListProps) => {
   return (
     <MenuListItem>
-      <StyledIcon icon={icon} isFirstIcon={isFirstIcon} />
+      <StyledIcon icon={icon} $isFirstIcon={isFirstIcon} />
       <div className="menu_text">{menu}</div>
     </MenuListItem>
   );
@@ -23,20 +23,24 @@ export default MenuList;
 const MenuListItem = styled.div`
   display: flex;
   align-items: center;
-  background-color: pink;
   padding: 0.75rem;
-  border-radius: 3%;
+  border-radius: 10px;
   margin-top: 1.5rem;
   white-space: nowrap;
   text-overflow: ellipsis;
   cursor: pointer;
+
+  &:hover {
+    background-color: #272727;
+  }
+
   @media screen and (max-width: 1300px) {
     flex-direction: column;
   }
 `;
 
-const StyledIcon = styled(FontAwesomeIcon)<{ isFirstIcon?: boolean }>`
-  display: ${({ isFirstIcon }) => (isFirstIcon ? "none" : "block")};
+const StyledIcon = styled(FontAwesomeIcon)<{ $isFirstIcon?: boolean }>`
+  display: ${({ $isFirstIcon }) => ($isFirstIcon ? "none" : "block")};
   margin-right: 0.5rem;
   @media screen and (max-width: 1300px) {
     display: block;

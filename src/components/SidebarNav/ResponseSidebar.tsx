@@ -65,10 +65,10 @@ export default ResponseSidebar;
 const Sidebar = styled.div`
   width: 15rem;
   height: 100rem;
-  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #ece6d5;
   @media screen and (max-width: 1300px) {
     width: 5rem;
   }
@@ -77,7 +77,7 @@ const Sidebar = styled.div`
 const TabMenuItemWrapper = styled.div`
   width: 95%;
   padding-bottom: 1rem;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #ece6d5;
   @media screen and (max-width: 1300px) {
     border-bottom: none;
     padding-bottom: 0;
