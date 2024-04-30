@@ -29,14 +29,7 @@ const MenuListItem = styled.div`
   margin-top: 1.5rem;
   white-space: nowrap;
   text-overflow: ellipsis;
-
-  & > .menu_text {
-    margin-left: 0.5rem;
-    @media screen and (max-width: 1300px) {
-      margin-left: 0;
-    }
-  }
-
+  cursor: pointer;
   @media screen and (max-width: 1300px) {
     flex-direction: column;
   }
@@ -44,4 +37,9 @@ const MenuListItem = styled.div`
 
 const StyledIcon = styled(FontAwesomeIcon)<{ isFirstIcon?: boolean }>`
   display: ${({ isFirstIcon }) => (isFirstIcon ? "none" : "block")};
+  margin-right: 0.5rem;
+  @media screen and (max-width: 1300px) {
+    display: block;
+    margin-right: 0;
+  }
 `;
