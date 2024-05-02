@@ -38,7 +38,6 @@ const ResponseSidebar = () => {
     faClock,
     faThumbsUp,
   ];
-
   return (
     <Sidebar>
       <TabMenuItemWrapper>
@@ -56,6 +55,9 @@ const ResponseSidebar = () => {
           />
         ))}
       </MyTabItemWrapper>
+      <MySubscribe>
+        <div>구독</div>
+      </MySubscribe>
     </Sidebar>
   );
 };
@@ -67,7 +69,7 @@ const Sidebar = styled.div`
   height: 100rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   color: #ece6d5;
   @media screen and (max-width: 1300px) {
     width: 5rem;
@@ -91,5 +93,14 @@ const MyTabItemWrapper = styled(TabMenuItemWrapper)`
     & > :nth-child(n + 2) {
       display: none;
     }
+  }
+`;
+
+const MySubscribe = styled(TabMenuItemWrapper)`
+  height: 25rem;
+  padding-top: 0.75rem;
+  padding-left: 0.75rem;
+  @media screen and (max-width: 1300px) {
+    display: none;
   }
 `;

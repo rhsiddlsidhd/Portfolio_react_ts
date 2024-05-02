@@ -11,18 +11,30 @@ interface Props {
 }
 
 const CenterWrapper = ({ $isResponsiveScreen }: Props) => {
-  const [isValue, setIsValue] = useState("");
+  const [isValue, setIsValue] = useState(false);
 
-  const handleIsValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(e.target);
-    setIsValue(e.target.value);
+  const handleIsValue = () => {
+    console.log("클릭?");
+    if (isValue === false) {
+      setIsValue(!isValue);
+    }
+  };
+  const handleIsValueBlur = () => {
+    if (isValue === true) {
+      setIsValue(false);
+    }
+  };
+
+  const handleIconClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation(); // 이벤트 버블링 방지
+    console.log("아이콘 클릭!");
   };
 
   return (
     <SearchContainer $responsive={$isResponsiveScreen}>
       <InputKeywordSearchLabel
         $responsive={$isResponsiveScreen}
-        $isInputValue={isValue.length > 0}
+        $isInputValue={isValue}
       >
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
@@ -32,10 +44,14 @@ const CenterWrapper = ({ $isResponsiveScreen }: Props) => {
           type="text"
           className="input_keyword_search"
           placeholder="검색"
-          onChange={(e) => handleIsValue(e)}
-          value={isValue}
+          onClick={handleIsValue}
+          // 클릭한 후에 다른 영역 클릭했을대도 false로 전환
+          onBlur={handleIsValueBlur}
         />
-        <div className="input_keyword_search_icon_wrapper">
+        <div
+          className="input_keyword_search_icon_wrapper"
+          onClick={(e) => handleIconClick(e)}
+        >
           <FontAwesomeIcon
             icon={faMagnifyingGlass}
             className="input_keyword_search_icon"
