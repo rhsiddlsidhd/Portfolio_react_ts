@@ -26,38 +26,41 @@ const CenterWrapper = ({ $isResponsiveScreen }: Props) => {
   };
 
   const handleIconClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation(); // 이벤트 버블링 방지
     console.log("아이콘 클릭!");
   };
 
   return (
     <SearchContainer $responsive={$isResponsiveScreen}>
-      <InputKeywordSearchLabel
-        $responsive={$isResponsiveScreen}
-        $isInputValue={isValue}
-      >
+      <SearchBar $responsive={$isResponsiveScreen} $isInputValue={isValue}>
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
           className="hide_search_icon"
         />
-        <input
-          type="text"
-          className="input_keyword_search"
-          placeholder="검색"
-          onClick={handleIsValue}
-          // 클릭한 후에 다른 영역 클릭했을대도 false로 전환
-          onBlur={handleIsValueBlur}
-        />
-        <div
+        <InputKeywordSearchLabel
+          $responsive={$isResponsiveScreen}
+          $isInputValue={isValue}
+        >
+          <input
+            type="text"
+            className="input_keyword_search"
+            placeholder="검색"
+            onClick={handleIsValue}
+            // 클릭한 후에 다른 영역 클릭했을때도 false로 전환
+            onBlur={handleIsValueBlur}
+          />
+        </InputKeywordSearchLabel>
+        <KeywordSearchIcon
           className="input_keyword_search_icon_wrapper"
-          onClick={(e) => handleIconClick(e)}
+          onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+            handleIconClick(e)
+          }
         >
           <FontAwesomeIcon
             icon={faMagnifyingGlass}
             className="input_keyword_search_icon"
           />
-        </div>
-      </InputKeywordSearchLabel>
+        </KeywordSearchIcon>
+      </SearchBar>
       <MicroIconWrapper>
         <FontAwesomeIcon icon={faMicrophone} className="micro_icon" />
       </MicroIconWrapper>
@@ -70,7 +73,6 @@ export default CenterWrapper;
 const SearchContainer = styled.div<{ $responsive?: string }>`
   max-width: 50%;
   width: 50rem;
-
   display: flex;
   justify-content: end;
   align-items: center;
@@ -106,17 +108,19 @@ const SearchContainer = styled.div<{ $responsive?: string }>`
  *
  */
 
-const InputKeywordSearchLabel = styled.label<{
+const SearchBar = styled.div<{
   $responsive: string;
   $isInputValue: boolean;
 }>`
   width: ${({ $isInputValue }) => ($isInputValue ? "85%" : "80%")};
+
   height: 80%;
   display: flex;
   align-items: center;
-  justify-content: end;
-  border: 1.5px solid gray;
+  border: 1px solid white;
   border-radius: 2rem;
+  border: ${({ $isInputValue }) =>
+    $isInputValue ? "1.5px solid #0D47A1" : "1.5px solid gray"};
 
   .hide_search_icon {
     display: ${({ $isInputValue }) => ($isInputValue ? "flex" : "none")};
@@ -127,7 +131,6 @@ const InputKeywordSearchLabel = styled.label<{
     align-content: center;
     padding: 0.725rem;
   }
-
   ${({ $responsive }) =>
     $responsive &&
     $responsive === "true" &&
@@ -136,9 +139,19 @@ const InputKeywordSearchLabel = styled.label<{
         display: none;
       }
     `}
+`;
+
+const InputKeywordSearchLabel = styled.label<{
+  $responsive: string;
+  $isInputValue: boolean;
+}>`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
 
   .input_keyword_search {
-    width: 85%;
+    width: 90%;
     height: 75%;
     border: none;
     outline: none;
@@ -151,23 +164,24 @@ const InputKeywordSearchLabel = styled.label<{
 
     &::placeholder {
       font-size: 1.2rem;
-      display: flex;
+      /* display: flex; */
     }
   }
-  .input_keyword_search_icon_wrapper {
-    min-width: 4rem;
-    height: 100%;
-    background-color: gray;
-    border-top-right-radius: 2rem;
-    border-bottom-right-radius: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .input_keyword_search_icon {
-      height: 60%;
-      color: white;
-      background-color: transparent;
-    }
+`;
+
+const KeywordSearchIcon = styled.div`
+  min-width: 4rem;
+  height: 100%;
+  background-color: gray;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .input_keyword_search_icon {
+    height: 60%;
+    color: white;
+    background-color: transparent;
   }
 `;
 
