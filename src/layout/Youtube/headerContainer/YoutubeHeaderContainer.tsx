@@ -6,23 +6,21 @@ interface Props {
   windowHeaderHeightRef?: RefObject<HTMLDivElement>;
 }
 
-const LayoutContainer = ({
+const YoutubeHeaderContainer = ({
   headerRef,
   children,
   windowHeaderHeightRef,
 }: PropsWithChildren<Props>) => {
   return (
     <>
-      <HeaderContainer ref={headerRef || windowHeaderHeightRef}>
-        {children}
-      </HeaderContainer>
+      <Container ref={headerRef || windowHeaderHeightRef}>{children}</Container>
     </>
   );
 };
 
-export default LayoutContainer;
+export default YoutubeHeaderContainer;
 
-const HeaderContainer = styled.div`
+const Container = styled.div`
   width: 100%;
   height: ${({ theme }) => theme.height.header};
   display: flex;

@@ -10,7 +10,7 @@ interface Props {
   $isResponsiveScreen: string;
 }
 
-const CenterWrapper = ({ $isResponsiveScreen }: Props) => {
+const Search = ({ $isResponsiveScreen }: Props) => {
   const [isValue, setIsValue] = useState(false);
 
   const handleIsValue = () => {
@@ -68,7 +68,7 @@ const CenterWrapper = ({ $isResponsiveScreen }: Props) => {
   );
 };
 
-export default CenterWrapper;
+export default Search;
 
 const SearchContainer = styled.div<{ $responsive?: string }>`
   max-width: 50%;

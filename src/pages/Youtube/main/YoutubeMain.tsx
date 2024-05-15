@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import ResponseSidebar from "../../components/SidebarNav/ResponseSidebar";
-import NonUserMainPage from "../../components/Main/NonUserMainPage";
+import YoutubeSidebar from "../../../layout/Youtube/sidebar/YoutubeSidebar";
+import NonUserMainPage from "../../../components/Youtube/main/NonUserMainPage";
 
-const Main: React.FC = () => {
+const YoutubeMain: React.FC = () => {
   return (
     <Container>
-      <ResponseSidebar></ResponseSidebar>
+      <YoutubeSidebar></YoutubeSidebar>
       <YoutubeBody>
         <NonUserMainPage />
       </YoutubeBody>
@@ -14,7 +14,7 @@ const Main: React.FC = () => {
   );
 };
 
-export default Main;
+export default YoutubeMain;
 
 const Container = styled.div`
   width: 100%;
