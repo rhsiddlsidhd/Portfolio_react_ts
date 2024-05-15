@@ -5,15 +5,17 @@ import styled from "styled-components";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 interface MenuListProps {
-  menu: string; // 메뉴 이름
-  icon: IconDefinition; // 아이콘 정의
+  menu: string;
+  icon?: IconDefinition;
+  imageUrl?: string;
   isFirstIcon?: boolean;
 }
 
-const MenuList = ({ menu, icon, isFirstIcon }: MenuListProps) => {
+const MenuList = ({ menu, icon, imageUrl, isFirstIcon }: MenuListProps) => {
   return (
     <MenuListItem>
-      <StyledIcon icon={icon} $isFirstIcon={isFirstIcon} />
+      {icon && <StyledIcon icon={icon} $isFirstIcon={isFirstIcon} />}
+      {imageUrl && <img src={imageUrl} alt="이미지" />}
       {isFirstIcon ? (
         <>
           <div className="menu_text">{menu}</div>
@@ -35,17 +37,22 @@ const MenuListItem = styled.div`
   align-items: center;
   padding: 0.75rem;
   border-radius: 10px;
-  margin-top: 1.5rem;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+
   cursor: pointer;
-  /* justify-content: center; */
   &:hover {
     background-color: #272727;
   }
 
+  > img {
+    height: 1.5rem;
+    margin-right: 1.25rem;
+  }
   .menu_text {
     margin-right: 1rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
     @media screen and (max-width: 1300px) {
       margin-right: 0;
     }
@@ -59,6 +66,7 @@ const MenuListItem = styled.div`
 
   @media screen and (max-width: 1300px) {
     flex-direction: column;
+    padding: 1.5rem;
   }
 `;
 

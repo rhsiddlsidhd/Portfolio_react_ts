@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 interface Props {
   headerRef?: RefObject<HTMLDivElement>;
-  // headerHeightRef?: RefObject<HTMLDivElement>;
   windowHeaderHeightRef?: RefObject<HTMLDivElement>;
 }
 
@@ -28,4 +27,7 @@ const HeaderContainer = styled.div`
   height: ${({ theme }) => theme.height.header};
   display: flex;
   justify-content: space-between;
+  position: fixed;
+  background-color: #0f0f0f;
+  z-index: 5;
 `;

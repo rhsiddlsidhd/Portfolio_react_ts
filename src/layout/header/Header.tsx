@@ -12,7 +12,7 @@ import LayoutContainer from "../../components/Layout/LayoutContainer";
 import CenterWrapper from "../../components/Layout/CenterWrapper";
 import { Outlet } from "react-router-dom";
 
-const Header = () => {
+const Header: React.FC = () => {
   const [isResponseHeaderBar, setIsResponseHeaderBar] = useState(false);
   const headerRef = useRef<HTMLDivElement | null>(null);
   const windowHeaderHeightRef = useRef<HTMLDivElement | null>(null);
