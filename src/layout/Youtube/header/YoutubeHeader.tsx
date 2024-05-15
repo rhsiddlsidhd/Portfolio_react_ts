@@ -7,12 +7,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
-import ResponseHeader from "./ResponseHeader";
-import LayoutContainer from "../../components/Layout/LayoutContainer";
-import CenterWrapper from "../../components/Layout/CenterWrapper";
+import YoutubeResponseHeader from "./YoutubeResponseHeader";
+import LayoutContainer from "../headerContainer/YoutubeHeaderContainer";
+import Search from "../../../components/Youtube/layout/Search";
 import { Outlet } from "react-router-dom";
 
-const Header = () => {
+const YoutubeHeader: React.FC = () => {
   const [isResponseHeaderBar, setIsResponseHeaderBar] = useState(false);
   const headerRef = useRef<HTMLDivElement | null>(null);
   const windowHeaderHeightRef = useRef<HTMLDivElement | null>(null);
@@ -35,41 +35,40 @@ const Header = () => {
   return (
     <>
       {isResponseHeaderBar && (
-        <ResponseHeader
+        <YoutubeResponseHeader
           handleResponseHeaderBar={handleResponseHeaderBar}
           headerRef={headerRef}
         />
       )}
       {!isResponseHeaderBar && (
         <LayoutContainer windowHeaderHeightRef={windowHeaderHeightRef}>
-          <LeftWrapper>
+          <MenuAndLogoWrapper>
             <FontAwesomeIcon icon={faBars} className="hamburger_menu" />
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/1280px-YouTube_Logo_2017.svg.png"
               alt="로고 이미지"
               className="img_logo"
             />
-          </LeftWrapper>
-          <CenterWrapper hideOnSmallScreens="true" />
+          </MenuAndLogoWrapper>
+          <Search $isResponsiveScreen="true" />
           <ResponseInputIconWrapper>
             <FontAwesomeIcon
               icon={faMagnifyingGlass}
               className="response_input_keyword_search_icon"
               onClick={handleResponseHeaderBar}
             />
-
             <MicroIconWrapper>
               <FontAwesomeIcon icon={faMicrophone} className="micro_icon" />
             </MicroIconWrapper>
           </ResponseInputIconWrapper>
-          <RightWrapper>
+          <User>
             <div className="bell_icon_wrapper">
               <FontAwesomeIcon icon={faBell} className="bell_icon" />
             </div>
             <div className="user_icon_wrapper">
               <img src="#" alt="user" className="user_icon" />
             </div>
-          </RightWrapper>
+          </User>
         </LayoutContainer>
       )}
       <Outlet />
@@ -77,9 +76,9 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default YoutubeHeader;
 
-const LeftWrapper = styled.div`
+const MenuAndLogoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -134,7 +133,7 @@ const MicroIconWrapper = styled.div`
   }
 `;
 
-const RightWrapper = styled.div`
+const User = styled.div`
   width: 8rem;
   height: 100%;
 
