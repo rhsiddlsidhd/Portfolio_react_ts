@@ -8,10 +8,10 @@ export const TabMenuItemWrapper = styled.div`
   border-bottom: 1px solid #ece6d578;
 
   @media screen and (max-width: 1300px) {
-    border-bottom: none;
-    padding-bottom: 0;
     padding-top: 0;
     padding-left: 0;
+    padding-bottom: 0;
+    border-bottom: none;
   }
 `;
 
@@ -24,6 +24,9 @@ export const MyTabItemWrapper = styled(TabMenuItemWrapper)`
 `;
 
 export const MySubscribeWrapper = styled(TabMenuItemWrapper)`
+  > p {
+    margin-bottom: 1rem;
+  }
   @media screen and (max-width: 1300px) {
     display: none;
   }
@@ -32,10 +35,11 @@ export const MySubscribeWrapper = styled(TabMenuItemWrapper)`
 export const LoginTab = styled.div`
   width: fit-content;
   border: 1px solid #ece6d578;
+
   border-radius: 20px;
   display: flex;
   align-items: center;
-  margin-top: 1rem;
+  color: white;
   .user_icon {
     height: 1.5rem;
     padding: 0.5rem;

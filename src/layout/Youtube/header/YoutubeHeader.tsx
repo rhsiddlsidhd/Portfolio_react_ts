@@ -11,12 +11,21 @@ import YoutubeResponseHeader from "./YoutubeResponseHeader";
 import LayoutContainer from "../headerContainer/YoutubeHeaderContainer";
 import Search from "../../../components/Youtube/layout/Search";
 import { Outlet } from "react-router-dom";
+import Login from "../../../components/Youtube/login/Login";
+import { useSelector } from "react-redux";
+import { RootReducerState } from "../../../redux/store";
 
 const YoutubeHeader: React.FC = () => {
   const [isResponseHeaderBar, setIsResponseHeaderBar] = useState(false);
   const headerRef = useRef<HTMLDivElement | null>(null);
   const windowHeaderHeightRef = useRef<HTMLDivElement | null>(null);
 
+  const isAuth = useSelector(
+    // store 에 전달한 키 값 youtube
+    (state: RootReducerState) => state.youtube.isAuthenticated
+  );
+
+  console.log(isAuth);
   const handleResponseHeaderBar = () => {
     setIsResponseHeaderBar(!isResponseHeaderBar);
   };
@@ -61,14 +70,20 @@ const YoutubeHeader: React.FC = () => {
               <FontAwesomeIcon icon={faMicrophone} className="micro_icon" />
             </MicroIconWrapper>
           </ResponseInputIconWrapper>
-          <User>
-            <div className="bell_icon_wrapper">
-              <FontAwesomeIcon icon={faBell} className="bell_icon" />
-            </div>
-            <div className="user_icon_wrapper">
-              <img src="#" alt="user" className="user_icon" />
-            </div>
-          </User>
+          {isAuth ? (
+            <User>
+              <div className="bell_icon_wrapper">
+                <FontAwesomeIcon icon={faBell} className="bell_icon" />
+              </div>
+              <div className="user_icon_wrapper">
+                <img src="#" alt="user" className="user_icon" />
+              </div>
+            </User>
+          ) : (
+            <NonUser>
+              <Login />
+            </NonUser>
+          )}
         </LayoutContainer>
       )}
       <Outlet />
@@ -136,7 +151,6 @@ const MicroIconWrapper = styled.div`
 const User = styled.div`
   width: 8rem;
   height: 100%;
-
   display: flex;
   justify-content: space-between;
   margin-left: 3rem;
@@ -167,4 +181,12 @@ const User = styled.div`
   @media screen and (max-width: 767px) {
     margin-left: 0;
   }
+`;
+
+const NonUser = styled.div`
+  width: 8rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 3rem;
 `;
